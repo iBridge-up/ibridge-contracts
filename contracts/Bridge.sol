@@ -401,7 +401,7 @@ contract Bridge is Pausable, AccessControl, SafeMath {
         uint64 depositNonce,
         bytes32 resourceID,
         bytes32 dataHash
-    ) external onlyRelayers whenNotPaused {
+    ) external  whenNotPaused {
         uint72 nonceAndID = (uint72(depositNonce) << 8) | uint72(chainID);
         Proposal memory proposal = _proposals[nonceAndID][dataHash];
 
@@ -526,7 +526,7 @@ contract Bridge is Pausable, AccessControl, SafeMath {
         uint64 depositNonce,
         bytes calldata data,
         bytes32 resourceID
-    ) external onlyRelayers whenNotPaused {
+    ) external whenNotPaused {
         address handler = _resourceIDToHandlerAddress[resourceID];
         uint72 nonceAndID = (uint72(depositNonce) << 8) | uint72(chainID);
         bytes32 dataHash = keccak256(abi.encodePacked(handler, data));
